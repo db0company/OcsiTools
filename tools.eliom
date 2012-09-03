@@ -64,7 +64,5 @@ let no_link () =
   let debug str =
     Firebug.console##log (Js.string str)
 
-let _ = (debug "toto") + 1
-
 }}
 
