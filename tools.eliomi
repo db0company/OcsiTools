@@ -14,7 +14,7 @@ open D
 open Eliom_parameter
 
 (* ************************************************************************** *)
-(* HTML5 Regular Elements                                                     *)
+(* Static Dir tools                                                           *)
 (* ************************************************************************** *)
 
 (* Return the uri corresponding to the file using the static directory        *)
@@ -37,6 +37,12 @@ val no_link : unit ->
    [ `WithoutSuffix ], unit, unit,
    [< Eliom_service.registrable > `Unregistrable ], 'a)
     Eliom_service.service
+
+(* Return an external link using the url, the elt to be displayed and stuff   *)
+val external_link : ?path:Eliom_lib.Url.path ->
+  ?get_params:(unit, [ `WithoutSuffix ], unit) Eliom_parameter.params_type ->
+  ?params:unit -> string -> 'a Eliom_content_core.Html5.elt list ->
+  [> 'a Html5_types.a ] Eliom_content_core.Html5.elt
 
 (* ************************************************************************** *)
 (* Js Tools                                                                   *)

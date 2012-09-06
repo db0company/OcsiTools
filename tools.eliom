@@ -14,7 +14,7 @@ open D
 open Eliom_parameter
 
 (* ************************************************************************** *)
-(* HTML5 Regular Elements                                                     *)
+(* Static Dir tools                                                           *)
 (* ************************************************************************** *)
 
 (* string list -> uri                                                         *)
@@ -45,6 +45,18 @@ let no_link () =
     ~path:[]
     ~get_params:unit
     ()
+
+(* ?(path : string list) -> ?(get_params : Eliom_parameter.params_type) ->    *)
+(* ?(params : Eliom_parameter) -> string -> Eliom_content.Html5 elt -> a      *)
+(* Return an external link using the url, the elt to be displayed and stuff   *)
+let external_link ?(path = []) ?(get_params = unit) ?(params = ()) url elt =
+  let service =
+    Eliom_service.external_service
+      ~prefix:url
+      ~path:path
+      ~get_params:get_params
+      () in
+  a ~service:service elt params
 
 (* ************************************************************************** *)
 (* Js Tools                                                                   *)
