@@ -5,7 +5,7 @@
 (* Latest Version is on GitHub: https://github.com/db0company/OcsiTools       *)
 (* ************************************************************************** *)
 
-type result = Success of 'a | Failure of string
+type 'a result = Success of 'a | Failure of string
 
 (* string -> bool                                                             *)
 (* Check if the string is a positive number                                   *)
