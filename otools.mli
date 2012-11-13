@@ -10,3 +10,5 @@ type 'a result = Success of 'a | Failure of string
 (* Check if the string is a positive number                                   *)
 val is_numeric : string -> bool
 
+(* Generate a random string with the given lenght                             *)
+val random_string : int -> string
