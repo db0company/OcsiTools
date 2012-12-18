@@ -5,7 +5,7 @@
 (* Latest Version is on GitHub: https://github.com/db0company/OcsiTools       *)
 (* ************************************************************************** *)
 
-type 'a result = Success of 'a | Failure of string
+type ('a, 'b) result = Success of 'a | Failure of 'b
 
 (* string -> bool                                                             *)
 (* Check if the string is a positive number                                   *)
@@ -25,3 +25,13 @@ let random_string length =
   let gen _ = String.make 1 (char_of_int (gen ())) in
     String.concat "" (Array.to_list (Array.init length gen))
 
+(* ('a option) list -> 'a list                                                *)
+(* Return a list with only available datas (ignore "None")                    *)
+let option_filter (l : ('a option) list) : 'a list =
+  let rec aux acc = function
+    | []   -> List.rev acc
+    | h::t ->
+      (match h with
+	| Some d -> aux (d::acc) t
+	| None   -> aux acc t) in
+  aux [] l
