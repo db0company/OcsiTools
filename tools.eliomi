@@ -24,7 +24,7 @@ val sturi : string list -> Eliom_content_core.Xml.uri
 val css : string list -> [> Html5_types.link ] Eliom_content_core.Html5.elt
 
 (* Return an element of type script (using the static dir) to put on your page*)
-val script_url : string list -> [> Html5_types.script ] Eliom_content.Html5.D.elt
+val script_url : string list -> [> Html5_types.script ] Eliom_content.Html5.F.elt
 
 (* ************************************************************************** *)
 (* Useful services                                                            *)

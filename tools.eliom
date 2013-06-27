@@ -8,7 +8,7 @@
 {shared{
 open Eliom_content
 open Html5
-open D
+open F
 }}
 
 open Eliom_parameter
@@ -32,6 +32,10 @@ let css file =
 let script_url file =
   script
     ~a:[a_src (sturi ("js"::file))] (pcdata "")
+
+let img ?(alt = "") ?(a = []) file =
+  img ~alt:(if alt = "" then (List.hd (List.rev file)) else alt)
+      ~a:a ~src:(sturi ("img"::file)) ()
 
 (* ************************************************************************** *)
 (* Useful services                                                            *)
