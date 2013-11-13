@@ -33,6 +33,10 @@ let script_url file =
   script
     ~a:[a_src (sturi ("js"::file))] (pcdata "")
 
+let image ?(alt = "") ?(a = []) file =
+  img ~alt:(if alt = "" then (List.hd (List.rev file)) else alt)
+      ~a:a ~src:(sturi ("image"::file)) ()
+
 let img ?(alt = "") ?(a = []) file =
   img ~alt:(if alt = "" then (List.hd (List.rev file)) else alt)
       ~a:a ~src:(sturi ("img"::file)) ()
@@ -53,14 +57,14 @@ let no_link () =
 (* ?(path : string list) -> ?(get_params : Eliom_parameter.params_type) ->    *)
 (* ?(params : Eliom_parameter) -> string -> Eliom_content.Html5 elt -> a      *)
 (* Return an external link using the url, the elt to be displayed and stuff   *)
-let external_link ?(path = []) ?(get_params = unit) ?(params = ()) url elt =
+let external_link ?(arg = []) ?(path = []) ?(get_params = unit) ?(params = ()) url elt =
   let service =
     Eliom_service.external_service
       ~prefix:url
       ~path:path
       ~get_params:get_params
       () in
-  a ~service:service elt params
+  a ~a:arg ~service:service elt params
 
 (* ************************************************************************** *)
 (* Js Tools                                                                   *)
