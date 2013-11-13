@@ -25,6 +25,10 @@ let random_string length =
   let gen _ = String.make 1 (char_of_int (gen ())) in
     String.concat "" (Array.to_list (Array.init length gen))
 
+(* ************************************************************************** *)
+(* Optional values manipulation                                               *)
+(* ************************************************************************** *)
+
 (* ('a option) list -> 'a list                                                *)
 (* Return a list with only available datas (ignore "None")                    *)
 let option_filter (l : ('a option) list) : 'a list =
@@ -35,3 +39,23 @@ let option_filter (l : ('a option) list) : 'a list =
 	| Some d -> aux (d::acc) t
 	| None   -> aux acc t) in
   aux [] l
+
+(* Return true if Some, false if None *)
+let option_bool = function
+  | None -> false
+  | Some _ -> true
+
+(* Take an optional string and return a None if it's empty ("") or None       *)
+let empty_string_to_option = function
+  | None   -> None
+  | Some s -> if String.length s = 0 then None else Some s
+
+let option_default default = function
+  | Some a -> a
+  | None -> default
+
+exception No_value
+
+let option_get = function
+  | Some a -> a
+  | None -> raise No_value
