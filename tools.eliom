@@ -66,6 +66,9 @@ let external_link ?(arg = []) ?(path = []) ?(get_params = unit) ?(params = ()) u
       () in
   a ~a:arg ~service:service elt params
 
+let raw_external_link ?(a = []) url elt =
+  Html5.F.Raw.a ~a:(a @ [a_href (Xml.uri_of_string url)]) elt
+
 (* ************************************************************************** *)
 (* Js Tools                                                                   *)
 (* ************************************************************************** *)
