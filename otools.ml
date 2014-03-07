@@ -26,6 +26,20 @@ let random_string length =
     String.concat "" (Array.to_list (Array.init length gen))
 
 (* ************************************************************************** *)
+(* List                                                                       *)
+(* ************************************************************************** *)
+
+(* Take 2 lists, return a tuple with the elements that are in both and the    *)
+(* elements that are only in first list, and elements only in second list     *)
+let list_diff l1 l2 =
+  let (shared, only_in_first) = List.fold_left
+    (fun (s, o) e -> if List.mem e l2 then (e::s, o) else (s, e::o))
+    ([], []) l1 in
+  let only_in_second = List.fold_left
+    (fun o e -> if List.mem e shared then o else e::o) [] l2 in
+  (shared, only_in_first, only_in_second)
+
+(* ************************************************************************** *)
 (* Optional values manipulation                                               *)
 (* ************************************************************************** *)
 
